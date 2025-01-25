@@ -1,0 +1,58 @@
+                                                            ///BISMILLAHIR RAHMANIR RAHIM 
+                                                           ///============================
+/*
+Problem name : B. All Distinct
+Problem link : https://codeforces.com/problemset/problem/1692/B
+Platform     : Codeforces
+Author       : Md. Raju Miah
+*/
+#include<bits/stdc++.h>
+using namespace std;
+
+
+#define Raju ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+#define ll long long int
+#define pb push_back
+#define all(x) (x).begin(), (x).end()
+
+
+void solve()
+{
+    int n;
+    cin>>n;
+    vector<int>v(n);
+    map<int, int>mp;
+    for(int i=0; i<n; i++)
+    {
+        cin>>v[i];
+        mp[v[i]]++;
+    }
+    int dlte = 0;
+    for(auto i:mp)
+    {
+        dlte+=(i.second-1);
+    }
+    int ans =n - dlte;
+    if(dlte%2==1)
+    {
+        ans--;
+    }
+    cout<<ans<<endl;
+
+}
+
+
+int main()
+{
+    Raju;
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        solve();
+    }
+return 0;
+}
+
+
+                                                                     ///ALHAMDULILLAH
