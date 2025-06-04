@@ -22,7 +22,7 @@ int dx8[] = {0, 0, 1, 1, 1, -1, -1, -1};
 int dy8[] = {1,-1, 1, -1, 0, 0, -1, 1};
 const int N = 1e5+5;
 const int mod = 998244353;
-vector<int> pw(N);
+int pw[N];
 
 
 void result() 
@@ -33,38 +33,42 @@ void result()
         pw[i] = (2LL * pw[i - 1]) % mod;
     }
 }
-void solve()
+
+void solve() 
 {
     int n;
-    cin>>n;
+    cin >> n;
+    vector<int> a(n), b(n);
 
-    vector<int>p(n), q(n), r(n);
-    for(int i=0; i<n; i++)
+    for (int i=0; i<n; i++) 
     {
-        cin>>p[i];
+        cin >> a[i];
     }
-    for(int i=0; i<n; i++)
+    for (int i=0; i<n; i++) 
     {
-        cin>>q[i];
+        cin >> b[i];
     }
 
-    for(int i=0; i<n; i++)
+    int x = 0, y = 0; 
+    for (int i = 0; i < n; ++i) 
     {
-        int mv = 0, vl;
-        for(int j=0; j<=i; j++)
+        if (a[i] > a[x]) x = i;
+        if (b[i] > b[y]) y = i;
+
+        int res;
+        if (a[x] > b[y] || (a[x] == b[y] && b[i - x] > a[i - y])) 
         {
-            vl = (pw[p[j]] + pw[q[i-j]])%mod;
-            mv = max(mv, vl); 
+            res = (pw[a[x]] + pw[b[i - x]]) % mod;
+        } 
+        else {
+            res = (pw[a[i - y]] + pw[b[y]]) % mod;
         }
-        r[i]= mv;
-    }
 
-    for(int i=0; i<n; i++)
-    {
-        cout<<r[i]<<" ";
+        cout << res << " ";
     }
     cout<<endl;
 }
+
 
 int main()
 {
