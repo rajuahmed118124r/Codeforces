@@ -25,24 +25,32 @@ char maze[N][N];
 int visited[N][N];
 
 
+int SOLVE(int n, int a, int b, int c)
+{
+    vector<int>dp(n+1,-1e9);
+    dp[0]=0;
+    for(int i=1; i<=n; i++)
+    {
+        if(i>=a)
+        {
+            dp[i]=max(dp[i],dp[i-a]+1);
+        }
+        if(i>=b)
+        {
+            dp[i]=max(dp[i],dp[i-b]+1);
+        }
+        if(i>=c)
+        {
+            dp[i]=max(dp[i],dp[i-c]+1);
+        }
+    }
+    return dp[n];
+}
 void raju()
 {
     int n,a,b,c;
     cin>>n>>a>>b>>c;
-    int ans=0;
-    for(int i=0; i*a<=n; i++)
-    {
-        for(int j=0; (i*a+j*b)<=n; j++)
-        {
-            int k = (n-(i*a+j*b))/c;
-            int l = i*a+j*b+k*c;
-            if(l==n)
-            {
-                ans = max((i+j+k), ans);
-            }
-        }
-    }
-    cout<<ans<<endl;
+    cout<<SOLVE(n,a,b,c)<<endl;
 }
 
 int main()
